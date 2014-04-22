@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>为你的blog添加评论模块 - matti's home</title>
+  <meta name="author" content="Matti Lee">
+
+  
+  <meta name="description" content="有了评论模块，你就可以和志同道合的人一起讨论，也是获取观众建议的快捷方式。这里提供两种评论模块的配置方法：https://disqus.com和http://duoshuo.com disqus Disqus是一家第三方社会化评论系统，主要为网站主提供评论托管服务。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sudolee.github.io/blog/2014/04/21/add-comment-module-for-your-blog/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="matti's home" type="application/atom+xml">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,500,600,700,900' rel='stylesheet' type='text/css'>
+
+
+
+
+  
+
+  <style>html{background: url("/images/background.png") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}</style>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sudolee.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/archives">Blogs</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">为你的blog添加评论模块</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-21T20:38:55+08:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>有了评论模块，你就可以和志同道合的人一起讨论，也是获取观众建议的快捷方式。这里提供两种评论模块的配置方法：<a href="https://disqus.com/">https://disqus.com</a>和<a href="http://duoshuo.com/">http://duoshuo.com</a></p>
+
+<!--more-->
+
+
+<h2>disqus</h2>
+
+<p><em>Disqus是一家第三方社会化评论系统，主要为网站主提供评论托管服务。octopress已经支持了disqus的评论模块(见：<code>octopress/.themes/themename/source/_includes/post/disqus_thread.html</code>)，只需要简单的设置就可以工作。</em></p>
+
+<h3>在<a href="https://disqus.com/">https://disqus.com</a>注册</h3>
+
+<p>注册disqus非常简单，只要有邮箱就可以。注册完成后，登录之。</p>
+
+<h3>在disqus创建域名</h3>
+
+<p>进入网址<a href="http://disqus.com/admin/create/">http://disqus.com/admin/create</a>。创建你的域名，<code>site name</code>和<code>disqus url</code>要保持一致，这个就是稍后在octopress配置文件_config.yml里的是<code>disqus_short_name</code>.</p>
+
+<h3>在_config.yml设置新的<code>disqus_short_name</code></h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># _config.yml
+</span><span class='line'># Disqus Comments
+</span><span class='line'>disqus_short_name: yourshortname
+</span><span class='line'>disqus_show_comment_count: false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重新<code>rake generate</code>就可以看到包含评论模块的blog。</p>
+
+<h2>多说</h2>
+
+<p><a href="http://duoshuo.com/">多说</a>(WordPress)是一款追求极致体验的社会化评论框，可以用微博、QQ、人人、豆瓣等帐号登录并评论。因为它支持国内一些常用的社交网站，所以比较流行。</p>
+
+<p><strong>注：</strong>多说网的注册这里不再累述。</p>
+
+<h3>在多说网创建域名</h3>
+
+<p>多说网域名的创建不太好找，它在这里<a href="http://duoshuo.com/create-site">http://duoshuo.com/create-site</a>，创建域名后就可以获取<code>short_name</code>.<br/>
+<code>站点名称</code>和<code>多说域名</code>采用统一的字符串，如：<code>duoshuoshortname</code>，那么站点地址就设置为：<code>duoshuoshortname.com</code>。<br/>
+这里的域名就是short_name。</p>
+
+<h3>在_config.yml设置新的<code>duoshuo_short_name</code></h3>
+
+<p>在<code>_config.yml</code>里添加多说<code>short_name</code>和多说评论开关。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># _config.yml
+</span><span class='line'># Duoshuo Comments
+</span><span class='line'>duoshuo_comments: true
+</span><span class='line'>duoshuo_short_name: duoshuoshortname</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>在每个post的页面添加多说模块</h3>
+
+<ul>
+<li>在<code>source/_layouts/post.html</code>添加如下代码:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>｛% if site.duoshuo_comments == true and site.duoshuo_short_name and page.comments == true %｝
+</span><span class='line'>  <span class="nt">&lt;section&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>- Comments -<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;comments&quot;</span> <span class="na">aria-live=</span><span class="s">&quot;polite&quot;</span><span class="nt">&gt;</span>｛% include post/duoshuo.html %｝<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/section&gt;</span>
+</span><span class='line'>｛% endif %｝
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这段代码检查<code>_config.yml</code>里<code>duoshuo_comments: true</code>和<code>duoshuo_short_name</code>如果被设置就包含后面的网页<code>post/duoshuo.html</code>.<br/>
+<strong>注意:</strong> 这段代码里的&#8221;{&ldquo;和&rdquo;}&ldquo;都是中文字符，在实际代码中需要替换为英文字符。</p>
+
+<ul>
+<li>创建<code>post/duoshuo.html</code></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;ds-thread&quot;</span><span class="o">&gt;&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">duoshuoQuery</span> <span class="o">=</span> <span class="p">{</span><span class="nx">short_name</span><span class="o">:</span><span class="s2">&quot;yourduoshuoshortname&quot;</span><span class="p">};</span>
+</span><span class='line'>  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">ds</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">ds</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span><span class="nx">ds</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ds</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">==</span> <span class="s1">&#39;https:&#39;</span> <span class="o">?</span> <span class="s1">&#39;https:&#39;</span> <span class="o">:</span> <span class="s1">&#39;http:&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;//static.duoshuo.com/embed.js&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ds</span><span class="p">.</span><span class="nx">charset</span> <span class="o">=</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;head&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>       <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">ds</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">})();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重新<code>rake generate</code>就可以看到包含评论模块的blog。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matti Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-21T20:38:55+08:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/blog/'>blog</a>, <a class='category' href='/blog/categories/comments/'>comments</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/04/20/setup-githubpages-via-octopress/" title="Previous Post: 用GithubPages和octopress部署blog">&laquo; 用GithubPages和octopress部署blog</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section id="titles">
+  <a href="http://sudolee.github.io" title="matti's home"><img id="logo" src="http://sudolee.github.io/images/me.logo.png" /></a>
+  <h1 id="site_title"><a href="http://sudolee.github.io" title="matti's home">matti's home</a></h1>
+  <h3 id="site_subtitle">note & idea of development</h3>
+</section>
+
+<section id="menu">
+  <ul>
+    <li><i class="fa fa-home fa-lg"></i><a href="http://sudolee.github.io"> Home </a></li>
+    <li><i class="fa fa-calendar fa-lg"></i><a href="http://sudolee.github.io/blog/archives/"> Blogs </a></li>
+    <li><i class="fa fa-user fa-lg"></i><a href="http://sudolee.github.io/about/"> About </a></li>
+    <li><i class="fa fa-rss fa-lg"></i><a href="http://sudolee.github.io/atom.xml"> Feed </a></li>
+  </ul>
+</section>
+
+<section id="social">
+  
+
+  
+
+  
+    <a href="" title="g+#118223755054766487181"><i class="fa fa-google-plus fa-2x"></i></a>
+  
+
+  
+    <a href="https://github.com/sudolee" title="sudolee"><i class="fa fa-github fa-2x"></i></a>
+  
+
+  
+
+  
+</section>
+
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/21/add-comment-module-for-your-blog/">为你的blog添加评论模块</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/20/setup-githubpages-via-octopress/">用GithubPages和octopress部署blog</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sudolee',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/118223755054766487181?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Matti Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattilee';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sudolee.github.io/blog/2014/04/21/add-comment-module-for-your-blog/';
+        var disqus_url = 'http://sudolee.github.io/blog/2014/04/21/add-comment-module-for-your-blog/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

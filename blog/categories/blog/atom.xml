@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: blog | matti's home]]></title>
+  <link href="http://sudolee.github.io/blog/categories/blog/atom.xml" rel="self"/>
+  <link href="http://sudolee.github.io/"/>
+  <updated>2014-04-22T21:38:06+08:00</updated>
+  <id>http://sudolee.github.io/</id>
+  <author>
+    <name><![CDATA[Matti Lee]]></name>
+    <email><![CDATA[desoxydate@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[为你的blog添加评论模块]]></title>
+    <link href="http://sudolee.github.io/blog/2014/04/21/add-comment-module-for-your-blog/"/>
+    <updated>2014-04-21T20:38:55+08:00</updated>
+    <id>http://sudolee.github.io/blog/2014/04/21/add-comment-module-for-your-blog</id>
+    <content type="html"><![CDATA[<p>有了评论模块，你就可以和志同道合的人一起讨论，也是获取观众建议的快捷方式。这里提供两种评论模块的配置方法：<a href="https://disqus.com/">https://disqus.com</a>和<a href="http://duoshuo.com/">http://duoshuo.com</a></p>
+
+<!--more-->
+
+
+<h2>disqus</h2>
+
+<p><em>Disqus是一家第三方社会化评论系统，主要为网站主提供评论托管服务。octopress已经支持了disqus的评论模块(见：<code>octopress/.themes/themename/source/_includes/post/disqus_thread.html</code>)，只需要简单的设置就可以工作。</em></p>
+
+<h3>在<a href="https://disqus.com/">https://disqus.com</a>注册</h3>
+
+<p>注册disqus非常简单，只要有邮箱就可以。注册完成后，登录之。</p>
+
+<h3>在disqus创建域名</h3>
+
+<p>进入网址<a href="http://disqus.com/admin/create/">http://disqus.com/admin/create</a>。创建你的域名，<code>site name</code>和<code>disqus url</code>要保持一致，这个就是稍后在octopress配置文件_config.yml里的是<code>disqus_short_name</code>.</p>
+
+<h3>在_config.yml设置新的<code>disqus_short_name</code></h3>
+
+<p>```</p>
+
+<h1>_config.yml</h1>
+
+<h1>Disqus Comments</h1>
+
+<p>disqus_short_name: yourshortname
+disqus_show_comment_count: false
+<code>``
+重新</code>rake generate`就可以看到包含评论模块的blog。</p>
+
+<h2>多说</h2>
+
+<p><a href="http://duoshuo.com/">多说</a>(WordPress)是一款追求极致体验的社会化评论框，可以用微博、QQ、人人、豆瓣等帐号登录并评论。因为它支持国内一些常用的社交网站，所以比较流行。</p>
+
+<p><strong>注：</strong>多说网的注册这里不再累述。</p>
+
+<h3>在多说网创建域名</h3>
+
+<p>多说网域名的创建不太好找，它在这里<a href="http://duoshuo.com/create-site">http://duoshuo.com/create-site</a>，创建域名后就可以获取<code>short_name</code>.<br/>
+<code>站点名称</code>和<code>多说域名</code>采用统一的字符串，如：<code>duoshuoshortname</code>，那么站点地址就设置为：<code>duoshuoshortname.com</code>。<br/>
+这里的域名就是short_name。</p>
+
+<h3>在_config.yml设置新的<code>duoshuo_short_name</code></h3>
+
+<p>在<code>_config.yml</code>里添加多说<code>short_name</code>和多说评论开关。
+```</p>
+
+<h1>_config.yml</h1>
+
+<h1>Duoshuo Comments</h1>
+
+<p>duoshuo_comments: true
+duoshuo_short_name: duoshuoshortname
+```</p>
+
+<h3>在每个post的页面添加多说模块</h3>
+
+<ul>
+<li><p>在<code>source/_layouts/post.html</code>添加如下代码:
+<code>html
+｛% if site.duoshuo_comments == true and site.duoshuo_short_name and page.comments == true %｝
+&lt;section&gt;
+  &lt;h1&gt;- Comments -&lt;/h1&gt;
+  &lt;div id="comments" aria-live="polite"&gt;｛% include post/duoshuo.html %｝&lt;/div&gt;
+&lt;/section&gt;
+｛% endif %｝
+</code>
+这段代码检查<code>_config.yml</code>里<code>duoshuo_comments: true</code>和<code>duoshuo_short_name</code>如果被设置就包含后面的网页<code>post/duoshuo.html</code>.<br/>
+<strong>注意:</strong> 这段代码里的"{&ldquo;和&rdquo;}&ldquo;都是中文字符，在实际代码中需要替换为英文字符。</p></li>
+<li><p>创建<code>post/duoshuo.html</code>
+``` js</p></li>
+</ul>
+
+
+<div class="ds-thread"></div>
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yourduoshuoshortname"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+
+<p><code>``
+重新</code>rake generate`就可以看到包含评论模块的blog。</p>
+]]></content>
+  </entry>
+  
+</feed>

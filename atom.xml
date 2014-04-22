@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[matti's home]]></title>
+  <link href="http://sudolee.github.io/atom.xml" rel="self"/>
+  <link href="http://sudolee.github.io/"/>
+  <updated>2014-04-22T21:38:06+08:00</updated>
+  <id>http://sudolee.github.io/</id>
+  <author>
+    <name><![CDATA[Matti Lee]]></name>
+    <email><![CDATA[desoxydate@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[为你的blog添加评论模块]]></title>
+    <link href="http://sudolee.github.io/blog/2014/04/21/add-comment-module-for-your-blog/"/>
+    <updated>2014-04-21T20:38:55+08:00</updated>
+    <id>http://sudolee.github.io/blog/2014/04/21/add-comment-module-for-your-blog</id>
+    <content type="html"><![CDATA[<p>有了评论模块，你就可以和志同道合的人一起讨论，也是获取观众建议的快捷方式。这里提供两种评论模块的配置方法：<a href="https://disqus.com/">https://disqus.com</a>和<a href="http://duoshuo.com/">http://duoshuo.com</a></p>
+
+<!--more-->
+
+
+<h2>disqus</h2>
+
+<p><em>Disqus是一家第三方社会化评论系统，主要为网站主提供评论托管服务。octopress已经支持了disqus的评论模块(见：<code>octopress/.themes/themename/source/_includes/post/disqus_thread.html</code>)，只需要简单的设置就可以工作。</em></p>
+
+<h3>在<a href="https://disqus.com/">https://disqus.com</a>注册</h3>
+
+<p>注册disqus非常简单，只要有邮箱就可以。注册完成后，登录之。</p>
+
+<h3>在disqus创建域名</h3>
+
+<p>进入网址<a href="http://disqus.com/admin/create/">http://disqus.com/admin/create</a>。创建你的域名，<code>site name</code>和<code>disqus url</code>要保持一致，这个就是稍后在octopress配置文件_config.yml里的是<code>disqus_short_name</code>.</p>
+
+<h3>在_config.yml设置新的<code>disqus_short_name</code></h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># _config.yml
+</span><span class='line'># Disqus Comments
+</span><span class='line'>disqus_short_name: yourshortname
+</span><span class='line'>disqus_show_comment_count: false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重新<code>rake generate</code>就可以看到包含评论模块的blog。</p>
+
+<h2>多说</h2>
+
+<p><a href="http://duoshuo.com/">多说</a>(WordPress)是一款追求极致体验的社会化评论框，可以用微博、QQ、人人、豆瓣等帐号登录并评论。因为它支持国内一些常用的社交网站，所以比较流行。</p>
+
+<p><strong>注：</strong>多说网的注册这里不再累述。</p>
+
+<h3>在多说网创建域名</h3>
+
+<p>多说网域名的创建不太好找，它在这里<a href="http://duoshuo.com/create-site">http://duoshuo.com/create-site</a>，创建域名后就可以获取<code>short_name</code>.<br/>
+<code>站点名称</code>和<code>多说域名</code>采用统一的字符串，如：<code>duoshuoshortname</code>，那么站点地址就设置为：<code>duoshuoshortname.com</code>。<br/>
+这里的域名就是short_name。</p>
+
+<h3>在_config.yml设置新的<code>duoshuo_short_name</code></h3>
+
+<p>在<code>_config.yml</code>里添加多说<code>short_name</code>和多说评论开关。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># _config.yml
+</span><span class='line'># Duoshuo Comments
+</span><span class='line'>duoshuo_comments: true
+</span><span class='line'>duoshuo_short_name: duoshuoshortname</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>在每个post的页面添加多说模块</h3>
+
+<ul>
+<li>在<code>source/_layouts/post.html</code>添加如下代码:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>｛% if site.duoshuo_comments == true and site.duoshuo_short_name and page.comments == true %｝
+</span><span class='line'>  <span class="nt">&lt;section&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>- Comments -<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;comments&quot;</span> <span class="na">aria-live=</span><span class="s">&quot;polite&quot;</span><span class="nt">&gt;</span>｛% include post/duoshuo.html %｝<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/section&gt;</span>
+</span><span class='line'>｛% endif %｝
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这段代码检查<code>_config.yml</code>里<code>duoshuo_comments: true</code>和<code>duoshuo_short_name</code>如果被设置就包含后面的网页<code>post/duoshuo.html</code>.<br/>
+<strong>注意:</strong> 这段代码里的&#8221;{&ldquo;和&rdquo;}&ldquo;都是中文字符，在实际代码中需要替换为英文字符。</p>
+
+<ul>
+<li>创建<code>post/duoshuo.html</code></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;ds-thread&quot;</span><span class="o">&gt;&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">duoshuoQuery</span> <span class="o">=</span> <span class="p">{</span><span class="nx">short_name</span><span class="o">:</span><span class="s2">&quot;yourduoshuoshortname&quot;</span><span class="p">};</span>
+</span><span class='line'>  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">ds</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">ds</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span><span class="nx">ds</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ds</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">==</span> <span class="s1">&#39;https:&#39;</span> <span class="o">?</span> <span class="s1">&#39;https:&#39;</span> <span class="o">:</span> <span class="s1">&#39;http:&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;//static.duoshuo.com/embed.js&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ds</span><span class="p">.</span><span class="nx">charset</span> <span class="o">=</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;head&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>       <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">ds</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">})();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重新<code>rake generate</code>就可以看到包含评论模块的blog。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用GithubPages和octopress部署blog]]></title>
+    <link href="http://sudolee.github.io/blog/2014/04/20/setup-githubpages-via-octopress/"/>
+    <updated>2014-04-20T16:35:14+08:00</updated>
+    <id>http://sudolee.github.io/blog/2014/04/20/setup-githubpages-via-octopress</id>
+    <content type="html"><![CDATA[<p><em>一直想自己搭建一个blog，但又因购买域名和租用服务器之麻烦没有实现。最近看到github上推出了github page服务，于是跃跃欲试。之前对git和markdown比较熟悉，所以搭建起来也没什么困难。好吧，总算是个良好的开始。</em></p>
+
+<h2>github pages</h2>
+
+<p><img src="https://pages.github.com/favicon.ico" alt="github" /><br/>
+<code>github pages</code>可以用git托管blog的静态网页，还可以自定义域名。</p>
+
+<!--more-->
+
+
+<h3>创建主页</h3>
+
+<h4>创建个人/组织主页</h4>
+
+<p>创建新的仓库，并以<em>username</em>.github.io命名，<em>username</em>是你在github上的用户/组织名。<br/>
+<code>git clone https://github.com/username/username.github.io</code></p>
+
+<h4>创建项目主页</h4>
+
+<p>项目主页的创建只需要创建一个新的名为<code>gh-pages</code>的分支即可。
+<strong>注</strong>: github提供了自动生成项目主页的方法，并提供了一些漂亮的模板可供选择。</p>
+
+<p>参考: <a href="https://pages.github.com/">https://pages.github.com</a></p>
+
+<h2>octopress</h2>
+
+<p><img src="http://octopress.org/octopress-favicon.png" alt="octopress" /><br/>
+octopress是基于Jekyll博客引擎的一个框架。官方定义为：<code>A blogging framework for hackers</code>，可以生成github pages的静态网页。
+官方提供了详尽的<a href="http://octopress.org/docs/">文档</a>，这里只是记录配置的大致步骤。</p>
+
+<h2>安装ruby &amp; git</h2>
+
+<ul>
+<li>ubuntu: apt-get install ruby git-core</li>
+<li>archlinux: pacman -S ruby git</li>
+</ul>
+
+
+<h2>获取和安装Octopress</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git
+</span><span class='line'>cd octopress</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>安装octopress的依赖</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler
+</span><span class='line'>rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>安装octopress的默认主题</h3>
+
+<p><code>rake install</code></p>
+
+<p><strong>注意:</strong> 我在archlinux上安装的时候因为本地的rake版本太新了，运行时出错。按照提示，在<code>rake install</code>前加上<code>bundle exec</code>前缀就能正常运行了。</p>
+
+<h2>配置octopress</h2>
+
+<p><code>octopress</code>的作者使得它的配置尽量的简单，大多数情况下只需要修改<code>_config.yml</code>和<code>Rakefile</code>就可以正常工作了。
+<code>Rakefile</code>是blog部署相关的配置，除非使用<code>rsync</code>，否则不需要修改。</p>
+
+<p><code>_config.yml</code>是<strong>jekyll</strong>的主要配置文件，<code>octopress</code>对其作了一些定制，其中有三大配置项：<code>Main Configs</code>， <code>Jekyll &amp; Plugins</code> 和 <code>3rd Party Settings</code>。
+最基本的配置只需要修改<code>_config.yml</code>的以下字段就可以了：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>url:                # For rewriting urls for RSS, etc
+</span><span class='line'>title:              # Used in the header and title tags
+</span><span class='line'>subtitle:           # A description used in the header
+</span><span class='line'>author:             # Your name, for RSS, Copyright, Metadata</span></code></pre></td></tr></table></div></figure>
+
+
+<p>更多配置，请移步：<a href="http://octopress.org/docs/configuring/">Configuring Octopress</a></p>
+
+<h2>将博客部署到github上</h2>
+
+<ul>
+<li><p>运行命令<code>rake generate</code>将以<code>source</code>为源，生成静态blog网页保存在<code>public</code>目录。
+<strong>注：</strong> 如果你使用了比较新的rake，可能会提示<em>在你的命令前加上前缀<code>bundle exec</code>以解决问题</em>。</p></li>
+<li><p>现在你可以将<code>public</code>目录copy到你的github仓库<em>username</em>.github.io，提交后就可以展现新的blog。</p></li>
+<li>在<code>public</code>目录运行<code>rake preview</code>命令，可以在本地浏览器<code>http://127.0.0.1:4000</code>预览呈现效果。</li>
+</ul>
+
+
+<h2>开始写blog</h2>
+
+<p>博文必须存放在目录 <code>source/_posts</code>，并以Jekyll的命名方式<code>YYYY-MM-DD-post-title.markdown</code>。
+octopress提供了一些rake task，用来以正确的命名格式创建新的博文，并附件一些有用的yaml元数据。语法如下：
+<code>rake new_post["title"]</code>
+<code>title</code>是博文的主题，<code>new_post</code>会创建一个包含这个主题的文件。默认的扩展名是<code>markdown</code>，可以在<code>Rakefile</code>里配置不同的扩展名。
+例如：
+<code>rake new_post["用github pages和octopress部署blog"]</code>
+运行这条命令将会在生成博文源文件：<code>source/_posts/2014-04-20-yong-github-pageshe-octopressbu-shu-blog.markdown</code></p>
+
+<p>打开这个文件，可以看到像下面这样的yaml元数据(告诉jekyll博客引擎如何处理博文和页面)：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: post
+</span><span class='line'>title: "用github pages和octopress部署blog"
+</span><span class='line'>date: 2014-04-20 16:24:59 +0800
+</span><span class='line'>comments: true
+</span><span class='line'>categories: 
+</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
+
+
+<p>编辑这个文件，就可以撰写博文。完成后用小节<strong>将博客部署到github上</strong>的方法部署或预览博文。</p>
+
+<p>更多内容，请移步：<a href="http://octopress.org/docs/blogging">Blogging Basics</a></p>
+]]></content>
+  </entry>
+  
+</feed>

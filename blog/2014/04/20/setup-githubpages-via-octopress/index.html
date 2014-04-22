@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>用GithubPages和octopress部署blog - matti's home</title>
+  <meta name="author" content="Matti Lee">
+
+  
+  <meta name="description" content="一直想自己搭建一个blog，但又因购买域名和租用服务器之麻烦没有实现。最近看到github上推出了github page服务，于是跃跃欲试。之前对git和markdown比较熟悉，所以搭建起来也没什么困难。好吧，总算是个良好的开始。 github pages github &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sudolee.github.io/blog/2014/04/20/setup-githubpages-via-octopress/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="matti's home" type="application/atom+xml">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,500,600,700,900' rel='stylesheet' type='text/css'>
+
+
+
+
+  
+
+  <style>html{background: url("/images/background.png") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}</style>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sudolee.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/archives">Blogs</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">用GithubPages和octopress部署blog</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-20T16:35:14+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><em>一直想自己搭建一个blog，但又因购买域名和租用服务器之麻烦没有实现。最近看到github上推出了github page服务，于是跃跃欲试。之前对git和markdown比较熟悉，所以搭建起来也没什么困难。好吧，总算是个良好的开始。</em></p>
+
+<h2>github pages</h2>
+
+<p><img src="https://pages.github.com/favicon.ico" alt="github" /><br/>
+<code>github pages</code>可以用git托管blog的静态网页，还可以自定义域名。</p>
+
+<!--more-->
+
+
+<h3>创建主页</h3>
+
+<h4>创建个人/组织主页</h4>
+
+<p>创建新的仓库，并以<em>username</em>.github.io命名，<em>username</em>是你在github上的用户/组织名。<br/>
+<code>git clone https://github.com/username/username.github.io</code></p>
+
+<h4>创建项目主页</h4>
+
+<p>项目主页的创建只需要创建一个新的名为<code>gh-pages</code>的分支即可。
+<strong>注</strong>: github提供了自动生成项目主页的方法，并提供了一些漂亮的模板可供选择。</p>
+
+<p>参考: <a href="https://pages.github.com/">https://pages.github.com</a></p>
+
+<h2>octopress</h2>
+
+<p><img src="http://octopress.org/octopress-favicon.png" alt="octopress" /><br/>
+octopress是基于Jekyll博客引擎的一个框架。官方定义为：<code>A blogging framework for hackers</code>，可以生成github pages的静态网页。
+官方提供了详尽的<a href="http://octopress.org/docs/">文档</a>，这里只是记录配置的大致步骤。</p>
+
+<h2>安装ruby &amp; git</h2>
+
+<ul>
+<li>ubuntu: apt-get install ruby git-core</li>
+<li>archlinux: pacman -S ruby git</li>
+</ul>
+
+
+<h2>获取和安装Octopress</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git
+</span><span class='line'>cd octopress</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>安装octopress的依赖</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler
+</span><span class='line'>rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>安装octopress的默认主题</h3>
+
+<p><code>rake install</code></p>
+
+<p><strong>注意:</strong> 我在archlinux上安装的时候因为本地的rake版本太新了，运行时出错。按照提示，在<code>rake install</code>前加上<code>bundle exec</code>前缀就能正常运行了。</p>
+
+<h2>配置octopress</h2>
+
+<p><code>octopress</code>的作者使得它的配置尽量的简单，大多数情况下只需要修改<code>_config.yml</code>和<code>Rakefile</code>就可以正常工作了。
+<code>Rakefile</code>是blog部署相关的配置，除非使用<code>rsync</code>，否则不需要修改。</p>
+
+<p><code>_config.yml</code>是<strong>jekyll</strong>的主要配置文件，<code>octopress</code>对其作了一些定制，其中有三大配置项：<code>Main Configs</code>， <code>Jekyll &amp; Plugins</code> 和 <code>3rd Party Settings</code>。
+最基本的配置只需要修改<code>_config.yml</code>的以下字段就可以了：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>url:                # For rewriting urls for RSS, etc
+</span><span class='line'>title:              # Used in the header and title tags
+</span><span class='line'>subtitle:           # A description used in the header
+</span><span class='line'>author:             # Your name, for RSS, Copyright, Metadata</span></code></pre></td></tr></table></div></figure>
+
+
+<p>更多配置，请移步：<a href="http://octopress.org/docs/configuring/">Configuring Octopress</a></p>
+
+<h2>将博客部署到github上</h2>
+
+<ul>
+<li><p>运行命令<code>rake generate</code>将以<code>source</code>为源，生成静态blog网页保存在<code>public</code>目录。
+<strong>注：</strong> 如果你使用了比较新的rake，可能会提示<em>在你的命令前加上前缀<code>bundle exec</code>以解决问题</em>。</p></li>
+<li><p>现在你可以将<code>public</code>目录copy到你的github仓库<em>username</em>.github.io，提交后就可以展现新的blog。</p></li>
+<li>在<code>public</code>目录运行<code>rake preview</code>命令，可以在本地浏览器<code>http://127.0.0.1:4000</code>预览呈现效果。</li>
+</ul>
+
+
+<h2>开始写blog</h2>
+
+<p>博文必须存放在目录 <code>source/_posts</code>，并以Jekyll的命名方式<code>YYYY-MM-DD-post-title.markdown</code>。
+octopress提供了一些rake task，用来以正确的命名格式创建新的博文，并附件一些有用的yaml元数据。语法如下：
+<code>rake new_post["title"]</code>
+<code>title</code>是博文的主题，<code>new_post</code>会创建一个包含这个主题的文件。默认的扩展名是<code>markdown</code>，可以在<code>Rakefile</code>里配置不同的扩展名。
+例如：
+<code>rake new_post["用github pages和octopress部署blog"]</code>
+运行这条命令将会在生成博文源文件：<code>source/_posts/2014-04-20-yong-github-pageshe-octopressbu-shu-blog.markdown</code></p>
+
+<p>打开这个文件，可以看到像下面这样的yaml元数据(告诉jekyll博客引擎如何处理博文和页面)：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: post
+</span><span class='line'>title: "用github pages和octopress部署blog"
+</span><span class='line'>date: 2014-04-20 16:24:59 +0800
+</span><span class='line'>comments: true
+</span><span class='line'>categories: 
+</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
+
+
+<p>编辑这个文件，就可以撰写博文。完成后用小节<strong>将博客部署到github上</strong>的方法部署或预览博文。</p>
+
+<p>更多内容，请移步：<a href="http://octopress.org/docs/blogging">Blogging Basics</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matti Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-20T16:35:14+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/04/21/add-comment-module-for-your-blog/" title="Next Post: 为你的blog添加评论模块">为你的blog添加评论模块 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section id="titles">
+  <a href="http://sudolee.github.io" title="matti's home"><img id="logo" src="http://sudolee.github.io/images/me.logo.png" /></a>
+  <h1 id="site_title"><a href="http://sudolee.github.io" title="matti's home">matti's home</a></h1>
+  <h3 id="site_subtitle">note & idea of development</h3>
+</section>
+
+<section id="menu">
+  <ul>
+    <li><i class="fa fa-home fa-lg"></i><a href="http://sudolee.github.io"> Home </a></li>
+    <li><i class="fa fa-calendar fa-lg"></i><a href="http://sudolee.github.io/blog/archives/"> Blogs </a></li>
+    <li><i class="fa fa-user fa-lg"></i><a href="http://sudolee.github.io/about/"> About </a></li>
+    <li><i class="fa fa-rss fa-lg"></i><a href="http://sudolee.github.io/atom.xml"> Feed </a></li>
+  </ul>
+</section>
+
+<section id="social">
+  
+
+  
+
+  
+    <a href="" title="g+#118223755054766487181"><i class="fa fa-google-plus fa-2x"></i></a>
+  
+
+  
+    <a href="https://github.com/sudolee" title="sudolee"><i class="fa fa-github fa-2x"></i></a>
+  
+
+  
+
+  
+</section>
+
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/21/add-comment-module-for-your-blog/">为你的blog添加评论模块</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/20/setup-githubpages-via-octopress/">用GithubPages和octopress部署blog</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sudolee',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/118223755054766487181?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Matti Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattilee';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sudolee.github.io/blog/2014/04/20/setup-githubpages-via-octopress/';
+        var disqus_url = 'http://sudolee.github.io/blog/2014/04/20/setup-githubpages-via-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>
