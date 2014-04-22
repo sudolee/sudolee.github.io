@@ -18,7 +18,7 @@ categories: [blog, octopress, comments]
 注册disqus非常简单，只要有邮箱就可以。注册完成后，登录之。 
 
 ### 在disqus创建域名
-进入网址[http://disqus.com/admin/create](http://disqus.com/admin/create/)。创建你的域名，`site name`和`disqus url`要保持一致，这个就是稍后在octopress配置文件_config.yml里的是`disqus_short_name`.
+进入网址[http://disqus.com/admin/create](http://disqus.com/admin/create/)。创建你的域名，`site name`和`disqus url`要保持一致，这个就是稍后在octopress配置文件_config.yml里的`disqus_short_name`.
 
 ### 在_config.yml设置新的`disqus_short_name`
 ```
