@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: blog - matti's home</title>
+  <title>自定义octopress博客master分支的git提交信息 - matti's home</title>
   <meta name="author" content="Matti Lee">
 
   
-  <meta name="description" content="Category: blog">
+  <meta name="description" content="背景 octopress提供了快速部署blog的方法，但是在depoly时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。 idea 本来打算从rake命令行给传递参数，但是google了一下，不的要领。所以&hellip;
+因为自己对ruby不了解，所以想到从Makefile入手 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sudolee.github.ioblog/categories/blog/">
+  <link rel="canonical" href="http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -67,36 +68,143 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Blog</h1>
+    
+      <h1 class="entry-title">自定义octopress博客master分支的git提交信息</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-23T00:47:09+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><h2>背景</h2>
 
-  
-  <h2>2014</h2>
+<p>octopress提供了快速部署blog的方法，但是在depoly时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。</p>
 
-<article>
-  
-<h1><a href="/blog/2014/04/21/add-comment-module-for-your-blog/">为你的blog添加评论模块</a></h1>
-<time datetime="2014-04-21T20:38:55+08:00" pubdate><span class='month'>Apr</span> <span class='day'>21</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/blog/'>blog</a>, <a class='category' href='/blog/categories/comments/'>comments</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a></span>
-</footer>
+<!--more-->
 
 
-</article>
+<h2>idea</h2>
+
+<p>本来打算从rake命令行给传递参数，但是google了一下，不的要领。所以&hellip;
+因为自己对ruby不了解，所以想到从Makefile入手(本来已经给source分支添加了Makefile以方便操作), 将log写入文件。然后从rakefile里面获取Makefile的结果。</p>
+
+<h2>在Makefile里创建log</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='makefile'><span class='line'><span class="c"># Makefile</span>
+</span><span class='line'><span class="nf">deploy</span><span class="o">:</span>
+</span><span class='line'>  <span class="k">$(</span>shell <span class="o">[</span> ! -d _deploy <span class="o">]</span> <span class="o">&amp;&amp;</span> git clone --single-branch https://github.com/sudolee/sudolee.github.io.git _deploy<span class="k">)</span>
+</span><span class='line'>  @ <span class="o">[[</span> -n <span class="nv">$$</span>MSG <span class="o">]]</span> <span class="o">||</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s1">&#39;Pls set git commit message via: make deploy MSG=&quot;some commit&quot;&#39;</span>; <span class="nb">exit </span>1; <span class="o">}</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;${MSG}&quot;</span> &gt; .mygitcommitmsg
+</span><span class='line'>  bundle <span class="nb">exec </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这段代码检查makefile命令行所传递的message，如果没有就报错退出。
+如果MSG被传递进来就将其输出到本地文件<code>.mygicommitmsg</code>。</p>
+
+<h2>在Rakefile里读取log</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gd">-    puts &quot;\n## Committing: Site updated at #{Time.now.utc}&quot;</span>
+</span><span class='line'><span class="gd">-    message = &quot;Site updated at #{Time.now.utc}&quot;</span>
+</span><span class='line'><span class="gi">+    fgitcommitmsg = File.new(&quot;../.mygitcommitmsg&quot;)</span>
+</span><span class='line'><span class="gi">+    message = fgitcommitmsg.read</span>
+</span><span class='line'><span class="gi">+    puts &quot;\n## Committing: #{message}&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>rakefile在执行depoly task的时候会cd到<em>deploy目录，所以需要制定上层目录<br/>
+<strong>Note:</strong>如果在创建的时候直接保存到</em>deploy目录，在<code>rake deploy</code>的时候会被删除。</li>
+<li>从<code>.mygitcommitmsg</code>文件读取之前写入的log</li>
+</ul>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Matti Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-23T00:47:09+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/makefile/'>makefile</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/rake/'>rake</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/04/21/add-comment-module-for-your-blog/" title="Previous Post: 为你的blog添加评论模块">&laquo; 为你的blog添加评论模块</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -213,7 +321,10 @@
       var disqus_shortname = 'mattilee';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch/';
+        var disqus_url = 'http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

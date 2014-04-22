@@ -4,7 +4,7 @@
   <title><![CDATA[matti's home]]></title>
   <link href="http://sudolee.github.io/atom.xml" rel="self"/>
   <link href="http://sudolee.github.io/"/>
-  <updated>2014-04-22T23:33:55+08:00</updated>
+  <updated>2014-04-23T01:06:39+08:00</updated>
   <id>http://sudolee.github.io/</id>
   <author>
     <name><![CDATA[Matti Lee]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[自定义octopress博客master分支的git提交信息]]></title>
+    <link href="http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch/"/>
+    <updated>2014-04-23T00:47:09+08:00</updated>
+    <id>http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>octopress提供了快速部署blog的方法，但是在depoly时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。</p>
+
+<!--more-->
+
+
+<h2>idea</h2>
+
+<p>本来打算从rake命令行给传递参数，但是google了一下，不的要领。所以&hellip;
+因为自己对ruby不了解，所以想到从Makefile入手(本来已经给source分支添加了Makefile以方便操作), 将log写入文件。然后从rakefile里面获取Makefile的结果。</p>
+
+<h2>在Makefile里创建log</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='makefile'><span class='line'><span class="c"># Makefile</span>
+</span><span class='line'><span class="nf">deploy</span><span class="o">:</span>
+</span><span class='line'>  <span class="k">$(</span>shell <span class="o">[</span> ! -d _deploy <span class="o">]</span> <span class="o">&amp;&amp;</span> git clone --single-branch https://github.com/sudolee/sudolee.github.io.git _deploy<span class="k">)</span>
+</span><span class='line'>  @ <span class="o">[[</span> -n <span class="nv">$$</span>MSG <span class="o">]]</span> <span class="o">||</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s1">&#39;Pls set git commit message via: make deploy MSG=&quot;some commit&quot;&#39;</span>; <span class="nb">exit </span>1; <span class="o">}</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;${MSG}&quot;</span> &gt; .mygitcommitmsg
+</span><span class='line'>  bundle <span class="nb">exec </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这段代码检查makefile命令行所传递的message，如果没有就报错退出。
+如果MSG被传递进来就将其输出到本地文件<code>.mygicommitmsg</code>。</p>
+
+<h2>在Rakefile里读取log</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gd">-    puts &quot;\n## Committing: Site updated at #{Time.now.utc}&quot;</span>
+</span><span class='line'><span class="gd">-    message = &quot;Site updated at #{Time.now.utc}&quot;</span>
+</span><span class='line'><span class="gi">+    fgitcommitmsg = File.new(&quot;../.mygitcommitmsg&quot;)</span>
+</span><span class='line'><span class="gi">+    message = fgitcommitmsg.read</span>
+</span><span class='line'><span class="gi">+    puts &quot;\n## Committing: #{message}&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>rakefile在执行depoly task的时候会cd到<em>deploy目录，所以需要制定上层目录<br/>
+<strong>Note:</strong>如果在创建的时候直接保存到</em>deploy目录，在<code>rake deploy</code>的时候会被删除。</li>
+<li>从<code>.mygitcommitmsg</code>文件读取之前写入的log</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[为你的blog添加评论模块]]></title>
