@@ -4,7 +4,7 @@
   <title><![CDATA[matti's home]]></title>
   <link href="http://sudolee.github.io/atom.xml" rel="self"/>
   <link href="http://sudolee.github.io/"/>
-  <updated>2014-04-22T21:38:06+08:00</updated>
+  <updated>2014-04-22T22:15:57+08:00</updated>
   <id>http://sudolee.github.io/</id>
   <author>
     <name><![CDATA[Matti Lee]]></name>
@@ -225,11 +225,32 @@ octopress是基于Jekyll博客引擎的一个框架。官方定义为：<code>A 
 
 <h2>将博客部署到github上</h2>
 
+<h3>rake task for github pages</h3>
+
+<p><code>rake setup_github_pages</code>
+这个task会要求你输入github仓库的URL。如：<code>https://github.com/sudolee/sudolee.github.io.git</code>
+这条命令将完成以下工作:</p>
+
+<blockquote><p>要求你输入github pages的仓库url，并存储之
+将原来的octopress的git仓库重命名为<code>octopress</code>
+把你的github pages的仓库设置为默认的远程仓库<code>origin
+从当前分支</code>master<code>切换到</code>source<code>分支
+根据你的github pages仓库配置blog的url
+clone你的远程仓库到</code>_deploy`目录，用于部署你的blog</p></blockquote>
+
+<h3>生成静态网页</h3>
+
 <ul>
-<li><p>运行命令<code>rake generate</code>将以<code>source</code>为源，生成静态blog网页保存在<code>public</code>目录。
-<strong>注：</strong> 如果你使用了比较新的rake，可能会提示<em>在你的命令前加上前缀<code>bundle exec</code>以解决问题</em>。</p></li>
-<li><p>现在你可以将<code>public</code>目录copy到你的github仓库<em>username</em>.github.io，提交后就可以展现新的blog。</p></li>
-<li>在<code>public</code>目录运行<code>rake preview</code>命令，可以在本地浏览器<code>http://127.0.0.1:4000</code>预览呈现效果。</li>
+<li>运行命令<code>rake generate</code>将以<code>source</code>为源，生成静态blog网页保存在<code>public</code>目录，并copy到目录<code>_deploy</code>。
+<strong>注：</strong> 如果你使用了比较新的rake，可能会提示<em>在你的命令前加上前缀<code>bundle exec</code>以解决问题</em>。</li>
+</ul>
+
+
+<h3>提交新主页</h3>
+
+<ul>
+<li>现在你可以运行<code>rake deploy</code>将<code>_deploy</code>目录的内容提交到你的github仓库，提交后就可以展现新的blog。</li>
+<li>运行<code>rake preview</code>命令，可以在本地浏览器<code>http://127.0.0.1:4000</code>预览呈现效果。</li>
 </ul>
 
 
