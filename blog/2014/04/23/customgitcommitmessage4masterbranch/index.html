@@ -9,7 +9,7 @@
   <meta name="author" content="Matti Lee">
 
   
-  <meta name="description" content="背景 octopress提供了快速部署blog的方法，但是在depoly时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。 idea 本来打算从rake命令行给传递参数，但是google了一下，不的要领。所以&hellip;
+  <meta name="description" content="背景 octopress提供了快速部署blog的方法，但是在deploy时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。 idea 本来打算从rake命令行给传递参数，但是google了一下，不的要领。所以&hellip;
 因为自己对ruby不了解，所以想到从Makefile入手 &hellip;">
   
 
@@ -97,7 +97,7 @@
 
 <div class="entry-content"><h2>背景</h2>
 
-<p>octopress提供了快速部署blog的方法，但是在depoly时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。</p>
+<p>octopress提供了快速部署blog的方法，但是在deploy时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。</p>
 
 <!--more-->
 
@@ -144,7 +144,7 @@
 
 <ul>
 <li>rakefile在执行depoly task的时候会cd到<em>deploy目录，所以需要制定上层目录<br/>
-<strong>Note:</strong>如果在创建的时候直接保存到</em>deploy目录，在<code>rake deploy</code>的时候会被删除。</li>
+<strong>Note:</strong>如果在创建的时候直接保存到</em>deploy目录，在<code>rake deploy</code>的时候会一起被提交。</li>
 <li>从<code>.mygitcommitmsg</code>文件读取之前写入的log</li>
 </ul>
 

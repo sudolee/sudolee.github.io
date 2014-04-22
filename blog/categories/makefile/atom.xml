@@ -4,7 +4,7 @@
   <title><![CDATA[Category: makefile | matti's home]]></title>
   <link href="http://sudolee.github.io/blog/categories/makefile/atom.xml" rel="self"/>
   <link href="http://sudolee.github.io/"/>
-  <updated>2014-04-23T01:06:39+08:00</updated>
+  <updated>2014-04-23T01:12:04+08:00</updated>
   <id>http://sudolee.github.io/</id>
   <author>
     <name><![CDATA[Matti Lee]]></name>
@@ -20,7 +20,7 @@
     <id>http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
-<p>octopress提供了快速部署blog的方法，但是在depoly时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。</p>
+<p>octopress提供了快速部署blog的方法，但是在deploy时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。</p>
 
 <!--more-->
 
@@ -58,7 +58,7 @@ bundle exec rake deploy
 +    puts "\n## Committing: #{message}"
 </code>
 * rakefile在执行depoly task的时候会cd到<em>deploy目录，所以需要制定上层目录<br/>
-<strong>Note:</strong>如果在创建的时候直接保存到</em>deploy目录，在<code>rake deploy</code>的时候会被删除。
+<strong>Note:</strong>如果在创建的时候直接保存到</em>deploy目录，在<code>rake deploy</code>的时候会一起被提交。
 * 从<code>.mygitcommitmsg</code>文件读取之前写入的log</p>
 ]]></content>
   </entry>
