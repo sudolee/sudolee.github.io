@@ -1,8 +1,8 @@
 all:
-	cp -rfv orig_post/* source/_posts/
 	bundle exec rake generate
 
 deploy:
+	$(shell [ ! -d _deploy ] && git clone --single-branch https://github.com/sudolee/sudolee.github.io.git _deploy)
 	bundle exec rake deploy
 
 preview:
@@ -11,9 +11,6 @@ preview:
 
 install_oct2:
 	bundle exec rake install[oct2]
-
-clean:
-	rm -rf source/ public/ sass/
 
 install_classic:
 	bundle exec rake install[classic]

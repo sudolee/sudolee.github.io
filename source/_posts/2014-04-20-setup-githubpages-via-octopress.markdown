@@ -64,11 +64,24 @@ author:             # Your name, for RSS, Copyright, Metadata
 更多配置，请移步：[Configuring Octopress](http://octopress.org/docs/configuring/)
 
 ## 将博客部署到github上
-* 运行命令`rake generate`将以`source`为源，生成静态blog网页保存在`public`目录。
+### rake task for github pages
+`rake setup_github_pages`
+这个task会要求你输入github仓库的URL。如：`https://github.com/sudolee/sudolee.github.io.git`
+这条命令将完成以下工作:  
+> 要求你输入github pages的仓库url，并存储之。
+> 将原来的octopress的git仓库重命名为`octopress`。
+> 把你的github pages的仓库设置为默认的远程仓库`origin。
+> 从当前分支`master`切换到`source`分支。
+> 根据你的github pages仓库配置blog的url。
+> clone你的远程仓库到`_deploy`目录，用于部署你的blog。
+
+### 生成静态网页
+* 运行命令`rake generate`将以`source`为源，生成静态blog网页保存在`public`目录，并copy到目录`_deploy`。
 **注：** 如果你使用了比较新的rake，可能会提示*在你的命令前加上前缀`bundle exec`以解决问题*。
 
-* 现在你可以将`public`目录copy到你的github仓库*username*.github.io，提交后就可以展现新的blog。
-* 在`public`目录运行`rake preview`命令，可以在本地浏览器`http://127.0.0.1:4000`预览呈现效果。
+### 提交新主页
+* 现在你可以运行`rake deploy`将`_deploy`目录的内容提交到你的github仓库，提交后就可以展现新的blog。
+* 运行`rake preview`命令，可以在本地浏览器`http://127.0.0.1:4000`预览呈现效果。
 
 ## 开始写blog
 博文必须存放在目录 `source/_posts`，并以Jekyll的命名方式`YYYY-MM-DD-post-title.markdown`。
