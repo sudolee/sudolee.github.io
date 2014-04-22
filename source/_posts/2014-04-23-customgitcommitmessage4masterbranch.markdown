@@ -7,7 +7,7 @@ categories: [octopress, rake, git, makefile]
 ---
 
 ## 背景
-octopress提供了快速部署blog的方法，但是在depoly时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。
+octopress提供了快速部署blog的方法，但是在deploy时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。
 
 <!--more-->
 
@@ -36,5 +36,5 @@ deploy:
 +    puts "\n## Committing: #{message}"
 ```
 * rakefile在执行depoly task的时候会cd到_deploy目录，所以需要制定上层目录  
-**Note:**如果在创建的时候直接保存到_deploy目录，在`rake deploy`的时候会被删除。
+**Note:**如果在创建的时候直接保存到_deploy目录，在`rake deploy`的时候会一起被提交。
 * 从`.mygitcommitmsg`文件读取之前写入的log
