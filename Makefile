@@ -3,6 +3,8 @@ all:
 
 deploy:
 	$(shell [ ! -d _deploy ] && git clone --single-branch https://github.com/sudolee/sudolee.github.io.git _deploy)
+	@ [[ -n $$MSG ]] || { echo 'Pls set git commit message via: make deploy MSG="some commit"'; exit 1; }
+	echo "${MSG}" > .mygitcommitmsg
 	bundle exec rake deploy
 
 preview:
