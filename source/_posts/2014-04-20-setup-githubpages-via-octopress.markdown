@@ -3,16 +3,16 @@ layout: post
 title: "用GithubPages和octopress部署blog"
 date: 2014-04-20 16:35:14 +0800
 comments: true
-categories: 
+categories: [github pages, octopress, blog]
 ---
 
 *一直想自己搭建一个blog，但又因购买域名和租用服务器之麻烦没有实现。最近看到github上推出了github page服务，于是跃跃欲试。之前对git和markdown比较熟悉，所以搭建起来也没什么困难。好吧，总算是个良好的开始。*
 
+<!--more-->
+
 ## github pages
 ![github](https://pages.github.com/favicon.ico)  
 `github pages`可以用git托管blog的静态网页，还可以自定义域名。
-
-<!--more-->
 
 ### 创建主页
 #### 创建个人/组织主页

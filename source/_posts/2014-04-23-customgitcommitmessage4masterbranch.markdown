@@ -6,14 +6,12 @@ comments: true
 categories: [octopress, rake, git, makefile]
 ---
 
-## 背景
-octopress提供了快速部署blog的方法，但是在deploy时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。
+*octopress提供了快速部署blog的方法，但是在deploy时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。*
 
 <!--more-->
 
 ## idea
-本来打算从rake命令行给传递参数，但是google了一下，不的要领。所以...
-因为自己对ruby不了解，所以想到从Makefile入手(本来已经给source分支添加了Makefile以方便操作), 将log写入文件。然后从rakefile里面获取Makefile的结果。
+本来打算从rake命令行给传递参数，但是google了一下，不的要领。所以...因为自己对ruby不了解，所以想到从Makefile入手(本来已经给source分支添加了Makefile以方便操作), 将log写入文件。然后从rakefile里面获取Makefile的结果。
 
 ## 在Makefile里创建log
 ``` makefile
@@ -35,6 +33,6 @@ deploy:
 +    message = fgitcommitmsg.read
 +    puts "\n## Committing: #{message}"
 ```
-* rakefile在执行depoly task的时候会cd到_deploy目录，所以需要制定上层目录  
-**Note:**如果在创建的时候直接保存到_deploy目录，在`rake deploy`的时候会一起被提交。
+* rakefile在执行deploy task的时候会cd到`_deploy`目录，所以需要指定上层目录  
+**Note:** 如果在创建的时候直接保存到`_deploy`目录，在`rake deploy`的时候会一起被提交。
 * 从`.mygitcommitmsg`文件读取之前写入的log
