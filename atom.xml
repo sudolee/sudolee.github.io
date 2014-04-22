@@ -4,7 +4,7 @@
   <title><![CDATA[matti's home]]></title>
   <link href="http://sudolee.github.io/atom.xml" rel="self"/>
   <link href="http://sudolee.github.io/"/>
-  <updated>2014-04-23T01:12:04+08:00</updated>
+  <updated>2014-04-23T01:28:52+08:00</updated>
   <id>http://sudolee.github.io/</id>
   <author>
     <name><![CDATA[Matti Lee]]></name>
@@ -18,17 +18,14 @@
     <link href="http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch/"/>
     <updated>2014-04-23T00:47:09+08:00</updated>
     <id>http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p>octopress提供了快速部署blog的方法，但是在deploy时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。</p>
+    <content type="html"><![CDATA[<p><em>octopress提供了快速部署blog的方法，但是在deploy时发现所提交的信息每次都一样，不利于从log上直观的查看提交历史。</em></p>
 
 <!--more-->
 
 
 <h2>idea</h2>
 
-<p>本来打算从rake命令行给传递参数，但是google了一下，不的要领。所以&hellip;
-因为自己对ruby不了解，所以想到从Makefile入手(本来已经给source分支添加了Makefile以方便操作), 将log写入文件。然后从rakefile里面获取Makefile的结果。</p>
+<p>本来打算从rake命令行给传递参数，但是google了一下，不的要领。所以&hellip;因为自己对ruby不了解，所以想到从Makefile入手(本来已经给source分支添加了Makefile以方便操作), 将log写入文件。然后从rakefile里面获取Makefile的结果。</p>
 
 <h2>在Makefile里创建log</h2>
 
@@ -66,8 +63,8 @@
 
 
 <ul>
-<li>rakefile在执行depoly task的时候会cd到<em>deploy目录，所以需要制定上层目录<br/>
-<strong>Note:</strong>如果在创建的时候直接保存到</em>deploy目录，在<code>rake deploy</code>的时候会一起被提交。</li>
+<li>rakefile在执行deploy task的时候会cd到<code>_deploy</code>目录，所以需要指定上层目录<br/>
+<strong>Note:</strong> 如果在创建的时候直接保存到<code>_deploy</code>目录，在<code>rake deploy</code>的时候会一起被提交。</li>
 <li>从<code>.mygitcommitmsg</code>文件读取之前写入的log</li>
 </ul>
 
@@ -204,13 +201,13 @@
     <id>http://sudolee.github.io/blog/2014/04/20/setup-githubpages-via-octopress</id>
     <content type="html"><![CDATA[<p><em>一直想自己搭建一个blog，但又因购买域名和租用服务器之麻烦没有实现。最近看到github上推出了github page服务，于是跃跃欲试。之前对git和markdown比较熟悉，所以搭建起来也没什么困难。好吧，总算是个良好的开始。</em></p>
 
+<!--more-->
+
+
 <h2>github pages</h2>
 
 <p><img src="https://pages.github.com/favicon.ico" alt="github" /><br/>
 <code>github pages</code>可以用git托管blog的静态网页，还可以自定义域名。</p>
-
-<!--more-->
-
 
 <h3>创建主页</h3>
 
