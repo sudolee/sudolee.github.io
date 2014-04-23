@@ -91,7 +91,11 @@ delicious_user:
 delicious_count: 3
 
 # Google Analytics
+#google_analytics_tracking_id: UA-50289537-1
 google_analytics_tracking_id:
+
+# Baidu Analytics
+baidu_analytics_tracking: true
 
 # Facebook Like
 facebook_like: false
