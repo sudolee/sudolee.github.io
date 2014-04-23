@@ -4,7 +4,7 @@
   <title><![CDATA[matti's home]]></title>
   <link href="http://sudolee.github.io/atom.xml" rel="self"/>
   <link href="http://sudolee.github.io/"/>
-  <updated>2014-04-23T09:59:57+08:00</updated>
+  <updated>2014-04-23T10:12:51+08:00</updated>
   <id>http://sudolee.github.io/</id>
   <author>
     <name><![CDATA[Matti Lee]]></name>
@@ -54,10 +54,18 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
 </pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gd">-    puts &quot;\n## Committing: Site updated at #{Time.now.utc}&quot;</span>
 </span><span class='line'><span class="gd">-    message = &quot;Site updated at #{Time.now.utc}&quot;</span>
-</span><span class='line'><span class="gi">+    fgitcommitmsg = File.new(&quot;../.mygitcommitmsg&quot;)</span>
-</span><span class='line'><span class="gi">+    message = fgitcommitmsg.read</span>
+</span><span class='line'><span class="gi">+    if File.exist?(&quot;../.mygitcommitmsg&quot;)</span>
+</span><span class='line'><span class="gi">+      fgitcommitmsg = File.new(&quot;../.mygitcommitmsg&quot;)</span>
+</span><span class='line'><span class="gi">+      message = fgitcommitmsg.read</span>
+</span><span class='line'><span class="gi">+    else</span>
+</span><span class='line'><span class="gi">+      message = &quot;site updated (at) #{Time.now.utc}&quot;</span>
+</span><span class='line'><span class="gi">+    end</span>
 </span><span class='line'><span class="gi">+    puts &quot;\n## Committing: #{message}&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 

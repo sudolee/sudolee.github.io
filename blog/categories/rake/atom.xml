@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rake | matti's home]]></title>
   <link href="http://sudolee.github.io/blog/categories/rake/atom.xml" rel="self"/>
   <link href="http://sudolee.github.io/"/>
-  <updated>2014-04-23T09:59:57+08:00</updated>
+  <updated>2014-04-23T10:12:51+08:00</updated>
   <id>http://sudolee.github.io/</id>
   <author>
     <name><![CDATA[Matti Lee]]></name>
@@ -50,8 +50,12 @@ bundle exec rake deploy
 <p><code>diff
 -    puts "\n## Committing: Site updated at #{Time.now.utc}"
 -    message = "Site updated at #{Time.now.utc}"
-+    fgitcommitmsg = File.new("../.mygitcommitmsg")
-+    message = fgitcommitmsg.read
++    if File.exist?("../.mygitcommitmsg")
++      fgitcommitmsg = File.new("../.mygitcommitmsg")
++      message = fgitcommitmsg.read
++    else
++      message = "site updated (at) #{Time.now.utc}"
++    end
 +    puts "\n## Committing: #{message}"
 </code>
 * rakefile在执行deploy task的时候会cd到<code>_deploy</code>目录，所以需要指定上层目录<br/>
