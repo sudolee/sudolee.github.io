@@ -261,8 +261,12 @@ multitask :push do
   cp_r "#{public_dir}/.", deploy_dir
   cd "#{deploy_dir}" do
     system "git add -A"
-    fgitcommitmsg = File.new("../.mygitcommitmsg")
-    message = fgitcommitmsg.read
+    if File.exist?("../.mygitcommitmsg")
+      fgitcommitmsg = File.new("../.mygitcommitmsg")
+      message = fgitcommitmsg.read
+    else
+      message = "site updated (at) #{Time.now.utc}"
+    end
     puts "\n## Committing: #{message}"
     system "git commit -m \"#{message}\""
     puts "\n## Pushing generated #{deploy_dir} website"

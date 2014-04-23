@@ -6,6 +6,7 @@ deploy:
 	@ [[ -n $$MSG ]] || { echo 'Pls set git commit message via: make deploy MSG="some commit"'; exit 1; }
 	echo "${MSG}" > .mygitcommitmsg
 	bundle exec rake deploy
+	rm -f .mygitcommitmsg
 
 preview:
 	cd public

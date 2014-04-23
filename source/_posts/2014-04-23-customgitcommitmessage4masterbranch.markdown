@@ -29,8 +29,12 @@ deploy:
 ``` diff
 -    puts "\n## Committing: Site updated at #{Time.now.utc}"
 -    message = "Site updated at #{Time.now.utc}"
-+    fgitcommitmsg = File.new("../.mygitcommitmsg")
-+    message = fgitcommitmsg.read
++    if File.exist?("../.mygitcommitmsg")
++      fgitcommitmsg = File.new("../.mygitcommitmsg")
++      message = fgitcommitmsg.read
++    else
++      message = "site updated (at) #{Time.now.utc}"
++    end
 +    puts "\n## Committing: #{message}"
 ```
 * rakefile在执行deploy task的时候会cd到`_deploy`目录，所以需要指定上层目录  
