@@ -16,8 +16,7 @@ categories: [github pages, octopress, blog]
 
 ### 创建主页
 #### 创建个人/组织主页
-创建新的仓库，并以*username*.github.io命名，*username*是你在github上的用户/组织名。  
-`git clone https://github.com/username/username.github.io`
+创建个人/组织主页需要创建新的仓库，并以*username*.github.io命名，*username*是你在github上的用户/组织名称。
 #### 创建项目主页
 项目主页的创建只需要创建一个新的名为`gh-pages`的分支即可。
 **注**: github提供了自动生成项目主页的方法，并提供了一些漂亮的模板可供选择。
@@ -60,6 +59,7 @@ url:                # For rewriting urls for RSS, etc
 title:              # Used in the header and title tags
 subtitle:           # A description used in the header
 author:             # Your name, for RSS, Copyright, Metadata
+email:
 ```
 更多配置，请移步：[Configuring Octopress](http://octopress.org/docs/configuring/)
 
@@ -67,7 +67,8 @@ author:             # Your name, for RSS, Copyright, Metadata
 ### rake task for github pages
 `rake setup_github_pages`
 这个task会要求你输入github仓库的URL。如：`https://github.com/sudolee/sudolee.github.io.git`
-这条命令将完成以下工作:  
+这条命令将完成以下工作:
+
 > 要求你输入github pages的仓库url，并存储之。
 > 将原来的octopress的git仓库重命名为`octopress`。
 > 把你的github pages的仓库设置为默认的远程仓库`origin。
@@ -76,11 +77,11 @@ author:             # Your name, for RSS, Copyright, Metadata
 > clone你的远程仓库到`_deploy`目录，用于部署你的blog。
 
 ### 生成静态网页
-* 运行命令`rake generate`将以`source`为源，生成静态blog网页保存在`public`目录，并copy到目录`_deploy`。
+* 运行命令`rake generate`将以`source`为源，生成静态blog网页保存在`public`目录。
 **注：** 如果你使用了比较新的rake，可能会提示*在你的命令前加上前缀`bundle exec`以解决问题*。
 
 ### 提交新主页
-* 现在你可以运行`rake deploy`将`_deploy`目录的内容提交到你的github仓库，提交后就可以展现新的blog。
+* 现在可以运行`rake deploy`将目录`public`里的网页copy到目录`_deploy`，并提交到你的github仓库，提交后就可以展现新的blog。
 * 运行`rake preview`命令，可以在本地浏览器`http://127.0.0.1:4000`预览呈现效果。
 
 ## 开始写blog
@@ -96,7 +97,7 @@ octopress提供了一些rake task，用来以正确的命名格式创建新的�
 ```
 ---
 layout: post
-title: "用github pages和octopress部署blog"
+title: "用githubpages和octopress部署blog"
 date: 2014-04-20 16:24:59 +0800
 comments: true
 categories: 
