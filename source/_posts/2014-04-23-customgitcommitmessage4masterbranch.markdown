@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "自定义octopress博客master分支的git提交信息"
+title: "自定义octopress博客master分支的git推送信息"
 date: 2014-04-23 00:47:09 +0800
 comments: true
 categories: [octopress, rake, git, makefile]
@@ -21,7 +21,9 @@ deploy:
 	@ [[ -n $$MSG ]] || { echo 'Pls set git commit message via: make deploy MSG="some commit"'; exit 1; }
 	echo "${MSG}" > .mygitcommitmsg
 	bundle exec rake deploy
+	rm -f .mygitcommitmsg
 ```
+
 这段代码检查makefile命令行所传递的message，如果没有就报错退出。
 如果MSG被传递进来就将其输出到本地文件`.mygicommitmsg`。
 
@@ -37,6 +39,8 @@ deploy:
 +    end
 +    puts "\n## Committing: #{message}"
 ```
-* rakefile在执行deploy task的时候会cd到`_deploy`目录，所以需要指定上层目录  
+* rakefile在执行deploy task的时候会cd到`_deploy`目录，所以需要指定上层目录。
+
 **Note:** 如果在创建的时候直接保存到`_deploy`目录，在`rake deploy`的时候会一起被提交。
+
 * 从`.mygitcommitmsg`文件读取之前写入的log
