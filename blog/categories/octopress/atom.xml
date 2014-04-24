@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | matti's home]]></title>
   <link href="http://sudolee.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://sudolee.github.io/"/>
-  <updated>2014-04-24T21:10:00+08:00</updated>
+  <updated>2014-04-24T23:43:39+08:00</updated>
   <id>http://sudolee.github.io/</id>
   <author>
     <name><![CDATA[Matti Lee]]></name>
@@ -187,16 +187,20 @@ var duoshuoQuery = {short_name:"yourduoshuoshortname"};
 
 <h4>创建项目主页</h4>
 
-<p>项目主页的创建只需要创建一个新的名为<code>gh-pages</code>的分支即可。
-<strong>注</strong>: github提供了自动生成项目主页的方法，并提供了一些漂亮的模板可供选择。</p>
+<p>项目主页的创建只需要创建一个新的名为<code>gh-pages</code>的分支即可。</p>
+
+<p><strong>注</strong>: github提供了自动生成项目主页的方法，并提供了一些漂亮的模板可供选择。</p>
 
 <p>参考: <a href="https://pages.github.com/">https://pages.github.com</a></p>
 
 <h2>octopress</h2>
 
 <p><img src="http://octopress.org/octopress-favicon.png" alt="octopress" /><br/>
-octopress是基于Jekyll博客引擎的一个框架。官方定义为：<code>A blogging framework for hackers</code>，可以生成github pages的静态网页。
-官方提供了详尽的<a href="http://octopress.org/docs/">文档</a>，这里只是记录配置的大致步骤。</p>
+octopress是基于Jekyll博客引擎的一个框架。官方定义为：</p>
+
+<blockquote><p>A blogging framework for hackers</p></blockquote>
+
+<p>官方提供了详尽的<a href="http://octopress.org/docs/">文档</a>，这里只是记录配置的大致步骤。</p>
 
 <h2>安装ruby &amp; git</h2>
 
@@ -206,16 +210,16 @@ octopress是基于Jekyll博客引擎的一个框架。官方定义为：<code>A 
 </ul>
 
 
-<h2>获取和安装Octopress</h2>
+<h2>获取和配置Octopress</h2>
 
-<p><code>
+<p><code>bash
 git clone git://github.com/imathis/octopress.git
 cd octopress
 </code></p>
 
 <h3>安装octopress的依赖</h3>
 
-<p><code>
+<p><code>bash
 gem install bundler
 rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
 bundle install
@@ -225,12 +229,13 @@ bundle install
 
 <p><code>rake install</code></p>
 
-<p><strong>注意:</strong> 我在archlinux上安装的时候因为本地的rake版本太新了，运行时出错。按照提示，在<code>rake install</code>前加上<code>bundle exec</code>前缀就能正常运行了。</p>
+<p><strong>注意:</strong> 我在archlinux上安装的时候因为本地的rake版本太新了，运行时出错。按照提示，在<code>rakerakerake install</code>前加上<code>bundle exec</code>前缀就能正常运行了。</p>
 
 <h2>配置octopress</h2>
 
-<p><code>octopress</code>的作者使得它的配置尽量的简单，大多数情况下只需要修改<code>_config.yml</code>和<code>Rakefile</code>就可以正常工作了。
-<code>Rakefile</code>是blog部署相关的配置，除非使用<code>rsync</code>，否则不需要修改。</p>
+<p><code>octopress</code>的作者使得它的配置尽量的简单，大多数情况下只需要修改<code>_config.yml</code>和<code>Rakefile</code>就可以正常工作了。</p>
+
+<p><code>Rakefile</code>是blog部署相关的配置，除非使用<code>rsync</code>，否则不需要修改。</p>
 
 <p><code>_config.yml</code>是<strong>jekyll</strong>的主要配置文件，<code>octopress</code>对其作了一些定制，其中有三大配置项：<code>Main Configs</code>， <code>Jekyll &amp; Plugins</code> 和 <code>3rd Party Settings</code>。
 最基本的配置只需要修改<code>_config.yml</code>的以下字段就可以了：
@@ -247,24 +252,32 @@ email:
 
 <h3>rake task for github pages</h3>
 
-<p><code>rake setup_github_pages</code>
-这个task会要求你输入github仓库的URL。如：<code>https://github.com/sudolee/sudolee.github.io.git</code>
-这条命令将完成以下工作:</p>
+<p><code>rake setup_github_pages</code></p>
 
-<blockquote><p>要求你输入github pages的仓库url，并存储之。
-将原来的octopress的git仓库重命名为<code>octopress</code>。
-把你的github pages的仓库设置为默认的远程仓库<code>origin。
-从当前分支</code>master<code>切换到</code>source<code>分支。
-根据你的github pages仓库配置blog的url。
-clone你的远程仓库到</code>_deploy`目录，用于部署你的blog。</p></blockquote>
+<p>这个task会要求你输入github仓库的URL。如：<code>https://github.com/sudolee/sudolee.github.io.git</code></p>
+
+<p>这条命令将完成以下工作:</p>
+
+<blockquote><p>要求你输入github pages的仓库url，并存储之。</p>
+
+<p>将原来的octopress的git仓库重命名为<code>octopress</code>。</p>
+
+<p>把你的github pages的仓库设置为默认的远程仓库`origin。</p>
+
+<p>从当前分支<code>master</code>切换到<code>source</code>分支。</p>
+
+<p>根据你的github pages仓库配置blog的url。</p>
+
+<p>clone你的远程仓库到<code>_deploy</code>目录，用于部署你的blog。</p></blockquote>
 
 <h3>生成静态网页</h3>
 
 <ul>
-<li>运行命令<code>rake generate</code>将以<code>source</code>为源，生成静态blog网页保存在<code>public</code>目录。
-<strong>注：</strong> 如果你使用了比较新的rake，可能会提示<em>在你的命令前加上前缀<code>bundle exec</code>以解决问题</em>。</li>
+<li>运行命令<code>rake generate</code>将以<code>source</code>为源，生成静态blog网页保存在<code>public</code>目录。</li>
 </ul>
 
+
+<p><strong>注：</strong> 如果你使用了比较新的rake，可能会提示<em>在你的命令前加上前缀<code>bundle exec</code>以解决问题</em>。</p>
 
 <h3>提交新主页</h3>
 
@@ -274,22 +287,34 @@ clone你的远程仓库到</code>_deploy`目录，用于部署你的blog。</p><
 </ul>
 
 
+<h3>将源代码(source分支)推送到github</h3>
+
+<p><code>bash
+git add .
+git commit "some message"
+git push origin source
+</code></p>
+
 <h2>开始写blog</h2>
 
-<p>博文必须存放在目录 <code>source/_posts</code>，并以Jekyll的命名方式<code>YYYY-MM-DD-post-title.markdown</code>。
-octopress提供了一些rake task，用来以正确的命名格式创建新的博文，并附件一些有用的yaml元数据。语法如下：
-<code>rake new_post["title"]</code>
-<code>title</code>是博文的主题，<code>new_post</code>会创建一个包含这个主题的文件。默认的扩展名是<code>markdown</code>，可以在<code>Rakefile</code>里配置不同的扩展名。
-例如：
-<code>rake new_post["用github pages和octopress部署blog"]</code>
-运行这条命令将会在生成博文源文件：<code>source/_posts/2014-04-20-yong-github-pageshe-octopressbu-shu-blog.markdown</code></p>
+<p>博文必须存放在目录<code>source/_posts</code>，并以Jekyll的命名方式<code>YYYY-MM-DD-post-title.markdown</code>。
+octopress提供了一些rake task，用来以正确的命名格式创建新的博文，并附件一些有用的yaml元数据。语法如下：</p>
+
+<p><code>rake new_post["title"]</code></p>
+
+<p><code>title</code>是博文的主题，<code>new_post</code>会创建一个包含这个主题的文件。默认的扩展名是<code>markdown</code>，可以在<code>Rakefile</code>里配置不同的扩展名。</p>
+
+<p>例如：
+<code>rake new_post["setup-githubpages-via-octopress"]</code></p>
+
+<p>运行这条命令将会生成博文源文件：<code>source/_posts/2014-04-20-setup-githubpages-via-octopress.markdown</code></p>
 
 <p>打开这个文件，可以看到像下面这样的yaml元数据(告诉jekyll博客引擎如何处理博文和页面)：</p>
 
-<h2>```</h2>
+<h2>``` yaml</h2>
 
 <p>layout: post
-title: &ldquo;用githubpages和octopress部署blog&rdquo;
+title: &ldquo;setup-githubpages-via-octopress&rdquo;
 date: 2014-04-20 16:24:59 +0800
 comments: true</p>
 
