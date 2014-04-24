@@ -4,7 +4,7 @@
   <title><![CDATA[matti's home]]></title>
   <link href="http://sudolee.github.io/atom.xml" rel="self"/>
   <link href="http://sudolee.github.io/"/>
-  <updated>2014-04-24T23:43:39+08:00</updated>
+  <updated>2014-04-24T23:49:01+08:00</updated>
   <id>http://sudolee.github.io/</id>
   <author>
     <name><![CDATA[Matti Lee]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[自定义octopress博客master分支的git提交信息]]></title>
+    <title type="html"><![CDATA[自定义octopress博客master分支的git推送信息]]></title>
     <link href="http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch/"/>
     <updated>2014-04-23T00:47:09+08:00</updated>
     <id>http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch</id>
@@ -35,12 +35,14 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
+<span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='makefile'><span class='line'><span class="c"># Makefile</span>
 </span><span class='line'><span class="nf">deploy</span><span class="o">:</span>
 </span><span class='line'>  <span class="k">$(</span>shell <span class="o">[</span> ! -d _deploy <span class="o">]</span> <span class="o">&amp;&amp;</span> git clone --single-branch https://github.com/sudolee/sudolee.github.io.git _deploy<span class="k">)</span>
 </span><span class='line'>  @ <span class="o">[[</span> -n <span class="nv">$$</span>MSG <span class="o">]]</span> <span class="o">||</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s1">&#39;Pls set git commit message via: make deploy MSG=&quot;some commit&quot;&#39;</span>; <span class="nb">exit </span>1; <span class="o">}</span>
 </span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;${MSG}&quot;</span> &gt; .mygitcommitmsg
 </span><span class='line'>  bundle <span class="nb">exec </span>rake deploy
+</span><span class='line'>  rm -f .mygitcommitmsg
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -71,8 +73,13 @@
 
 
 <ul>
-<li>rakefile在执行deploy task的时候会cd到<code>_deploy</code>目录，所以需要指定上层目录<br/>
-<strong>Note:</strong> 如果在创建的时候直接保存到<code>_deploy</code>目录，在<code>rake deploy</code>的时候会一起被提交。</li>
+<li>rakefile在执行deploy task的时候会cd到<code>_deploy</code>目录，所以需要指定上层目录。</li>
+</ul>
+
+
+<p><strong>Note:</strong> 如果在创建的时候直接保存到<code>_deploy</code>目录，在<code>rake deploy</code>的时候会一起被提交。</p>
+
+<ul>
 <li>从<code>.mygitcommitmsg</code>文件读取之前写入的log</li>
 </ul>
 

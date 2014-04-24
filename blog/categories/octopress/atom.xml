@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | matti's home]]></title>
   <link href="http://sudolee.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://sudolee.github.io/"/>
-  <updated>2014-04-24T23:43:39+08:00</updated>
+  <updated>2014-04-24T23:49:01+08:00</updated>
   <id>http://sudolee.github.io/</id>
   <author>
     <name><![CDATA[Matti Lee]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[自定义octopress博客master分支的git提交信息]]></title>
+    <title type="html"><![CDATA[自定义octopress博客master分支的git推送信息]]></title>
     <link href="http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch/"/>
     <updated>2014-04-23T00:47:09+08:00</updated>
     <id>http://sudolee.github.io/blog/2014/04/23/customgitcommitmessage4masterbranch</id>
@@ -39,11 +39,13 @@
 @ [[ -n $$MSG ]] || { echo 'Pls set git commit message via: make deploy MSG="some commit"'; exit 1; }
 echo "${MSG}" &gt; .mygitcommitmsg
 bundle exec rake deploy
+rm -f .mygitcommitmsg
 </code></pre>
 
-<p><code>``
-这段代码检查makefile命令行所传递的message，如果没有就报错退出。
-如果MSG被传递进来就将其输出到本地文件</code>.mygicommitmsg`。</p>
+<p>```</p>
+
+<p>这段代码检查makefile命令行所传递的message，如果没有就报错退出。
+如果MSG被传递进来就将其输出到本地文件<code>.mygicommitmsg</code>。</p>
 
 <h2>在Rakefile里读取log</h2>
 
@@ -58,9 +60,14 @@ bundle exec rake deploy
 +    end
 +    puts "\n## Committing: #{message}"
 </code>
-* rakefile在执行deploy task的时候会cd到<code>_deploy</code>目录，所以需要指定上层目录<br/>
-<strong>Note:</strong> 如果在创建的时候直接保存到<code>_deploy</code>目录，在<code>rake deploy</code>的时候会一起被提交。
-* 从<code>.mygitcommitmsg</code>文件读取之前写入的log</p>
+* rakefile在执行deploy task的时候会cd到<code>_deploy</code>目录，所以需要指定上层目录。</p>
+
+<p><strong>Note:</strong> 如果在创建的时候直接保存到<code>_deploy</code>目录，在<code>rake deploy</code>的时候会一起被提交。</p>
+
+<ul>
+<li>从<code>.mygitcommitmsg</code>文件读取之前写入的log</li>
+</ul>
+
 ]]></content>
   </entry>
   
