@@ -108,8 +108,7 @@
 
 <h4>创建个人/组织主页</h4>
 
-<p>创建新的仓库，并以<em>username</em>.github.io命名，<em>username</em>是你在github上的用户/组织名。<br/>
-<code>git clone https://github.com/username/username.github.io</code></p>
+<p>创建个人/组织主页需要创建新的仓库，并以<em>username</em>.github.io命名，<em>username</em>是你在github上的用户/组织名称。</p>
 
 <h4>创建项目主页</h4>
 
@@ -168,10 +167,12 @@ octopress是基于Jekyll博客引擎的一个框架。官方定义为：<code>A 
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
+<span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>url:                # For rewriting urls for RSS, etc
 </span><span class='line'>title:              # Used in the header and title tags
 </span><span class='line'>subtitle:           # A description used in the header
-</span><span class='line'>author:             # Your name, for RSS, Copyright, Metadata</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>author:             # Your name, for RSS, Copyright, Metadata
+</span><span class='line'>email:</span></code></pre></td></tr></table></div></figure>
 
 
 <p>更多配置，请移步：<a href="http://octopress.org/docs/configuring/">Configuring Octopress</a></p>
@@ -194,7 +195,7 @@ clone你的远程仓库到</code>_deploy`目录，用于部署你的blog。</p><
 <h3>生成静态网页</h3>
 
 <ul>
-<li>运行命令<code>rake generate</code>将以<code>source</code>为源，生成静态blog网页保存在<code>public</code>目录，并copy到目录<code>_deploy</code>。
+<li>运行命令<code>rake generate</code>将以<code>source</code>为源，生成静态blog网页保存在<code>public</code>目录。
 <strong>注：</strong> 如果你使用了比较新的rake，可能会提示<em>在你的命令前加上前缀<code>bundle exec</code>以解决问题</em>。</li>
 </ul>
 
@@ -202,7 +203,7 @@ clone你的远程仓库到</code>_deploy`目录，用于部署你的blog。</p><
 <h3>提交新主页</h3>
 
 <ul>
-<li>现在你可以运行<code>rake deploy</code>将<code>_deploy</code>目录的内容提交到你的github仓库，提交后就可以展现新的blog。</li>
+<li>现在可以运行<code>rake deploy</code>将目录<code>public</code>里的网页copy到目录<code>_deploy</code>，并提交到你的github仓库，提交后就可以展现新的blog。</li>
 <li>运行<code>rake preview</code>命令，可以在本地浏览器<code>http://127.0.0.1:4000</code>预览呈现效果。</li>
 </ul>
 
@@ -228,7 +229,7 @@ octopress提供了一些rake task，用来以正确的命名格式创建新的�
 <span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>---
 </span><span class='line'>layout: post
-</span><span class='line'>title: "用github pages和octopress部署blog"
+</span><span class='line'>title: "用githubpages和octopress部署blog"
 </span><span class='line'>date: 2014-04-20 16:24:59 +0800
 </span><span class='line'>comments: true
 </span><span class='line'>categories: 
